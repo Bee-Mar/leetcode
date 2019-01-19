@@ -1,0 +1,9 @@
+-I/usr/include/c++/7.3.0/
+-I/usr/include/mpi/
+-I/usr/local/cuda/include/
+-I/usr/local/cuda/lib64/
+-I/usr/local/cuda-10.0/include/
+-I/usr/local/cuda-10.0/lib64/
+-I/usr/include/
+-I/usr/include/x86_64-linux-gnu/
+-I/usr/local/cuda-10.0/targets/x86_64-linx/include/
