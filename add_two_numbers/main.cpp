@@ -15,7 +15,6 @@ public:
     ListNode *temp = list;
     while (temp->next) {
       std::cout << temp->val << std::endl;
-
       temp = temp->next;
     }
   }
@@ -36,8 +35,7 @@ public:
   }
 
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-    int tempVal1, tempVal2, len1 = 0, len2 = 0, val1 = 0, val2 = 0, total = 0;
-    int i = 0, j = 0, exp = 10;
+    int val1 = 0, val2 = 0, total = 0, i = 0, j = 0, exp = 10;
     ListNode *temp1 = l1, *temp2 = l2;
 
     while (1) {
