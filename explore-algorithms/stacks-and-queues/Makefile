@@ -1,4 +1,4 @@
-TARGETS = stack queue circular_queue
+TARGETS = stack queue circular_queue bfs
 
 all: $(TARGETS)
 
@@ -10,6 +10,9 @@ queue: queue.cpp
 
 circular_queue: circular_queue.cpp
 	g++ -g -o circular_queue circular_queue.cpp
+
+bfs: bfs.cpp
+	g++ -g -o bfs bfs.cpp
 
 clean:
 	rm -f $(TARGETS)
