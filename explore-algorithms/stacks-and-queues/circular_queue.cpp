@@ -15,11 +15,13 @@ public:
 
   ~CircularQueue() {}
 
-  bool isEmpty() { return queue.size() == 0; }
+  bool isEmpty() { return head == -1; }
+
+  bool isFull() { return ((tail + 1) % size == head); }
 
   bool enqueue(int value) {
 
-    if ((tail + 1) % size == head) {
+    if (isFull()) {
       return false;
     }
 
