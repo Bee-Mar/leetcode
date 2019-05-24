@@ -1,12 +1,13 @@
+#include <stdio.h>
 #include <iostream>
 #include <vector>
 
 class CircularQueue {
-private:
+ private:
   std::vector<int> queue;
   int head, tail, size;
 
-public:
+ public:
   CircularQueue(int capacity) {
     queue.resize(capacity);
     size = capacity;
@@ -20,7 +21,6 @@ public:
   bool isFull() { return ((tail + 1) % size == head); }
 
   bool enqueue(int value) {
-
     if (isFull()) {
       return false;
     }
@@ -68,7 +68,6 @@ public:
 };
 
 int main() {
-
   CircularQueue queue(5);
 
   queue.enqueue(5);
