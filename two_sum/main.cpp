@@ -2,39 +2,44 @@
 #include <map>
 #include <vector>
 
+using namespace std;
+
 class Solution {
 public:
-  std::vector<int> twoSum(std::vector<int> nums, int target) {
-    int i = 0, complement = 0;
+  vector<int> twoSum(vector<int> &nums, int target) {
 
-    std::vector<int> result;
-    std::map<int, int> table;
+    vector<int> result = {0, 0};
 
-    for (i = 0; i < nums.size(); i++) {
-      table[nums[i]] = i;
-    }
+    map<int, int> table;
+
+    unsigned int i;
+    int complement;
 
     for (i = 0; i < nums.size(); i++) {
       complement = target - nums[i];
-      if (table[complement] && table.at(complement) != i) {
-        result.push_back(i);
-        result.push_back(table.at(target - nums[i]));
-        return result;
+      table.insert(pair<int, int>(nums[i], i));
+
+      if (table.find(complement) != table.end() && table.at(complement) != i) {
+        result[0] = table.at(complement);
+        result[1] = i;
+        break;
       }
     }
 
-    result.push_back(0);
-    result.push_back(0);
     return result;
   }
 };
 
 int main() {
 
+  int target = 6;
+  vector<int> nums = {3, 2, 4};
+
   Solution sol;
-  std::vector<int> input = {1, 3, 4, 2};
-  std::vector<int> result = sol.twoSum(input, 6);
-  std::cout << result[0] << " " << result[1] << std::endl;
+
+  vector<int> result = sol.twoSum(nums, target);
+
+  cout << result[0] << ", " << result[1] << endl;
 
   return 0;
 }
