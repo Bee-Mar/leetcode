@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include <iostream>
 #include <vector>
 
@@ -9,45 +8,24 @@ class CircularQueue {
 
  public:
   CircularQueue(int capacity) {
-    queue.resize(capacity);
-    size = capacity;
     head = tail = -1;
+    size = capacity;
+
+    queue.resize(capacity);
   }
 
   ~CircularQueue() {}
 
-  bool isEmpty() { return head == -1; }
+  inline bool isEmpty() { return head == -1; }
 
-  bool isFull() { return ((tail + 1) % size == head); }
+  inline bool isFull() { return ((tail + 1) % size) == head; }
 
-  bool enqueue(int value) {
-    if (isFull()) {
-      return false;
-    }
-
+  int last() {
     if (isEmpty()) {
-      head = 0;
+      return -1;
     }
 
-    tail = (++tail % size);
-
-    queue[tail] = value;
-
-    return true;
-  }
-
-  bool dequeue() {
-    if (isEmpty()) {
-      return false;
-    }
-
-    if (head == tail) {
-      head = tail = -1;
-    }
-
-    head = (++head % size);
-
-    return true;
+    return queue[tail];
   }
 
   int first() {
@@ -58,21 +36,48 @@ class CircularQueue {
     return queue[head];
   }
 
-  int last() {
-    if (isEmpty()) {
-      return -1;
+  bool enqueue(int value) {
+    if (isFull()) {
+      return false;
     }
 
-    return queue[tail];
+    if (isEmpty()) {
+      head = 0;
+    }
+
+    tail = (tail + 1) % size;
+
+    queue[tail] = value;
+    return true;
+  }
+
+  bool dequeue() {
+    if (isEmpty()) {
+      return false;
+    }
+
+    if (head == tail) {
+      head = tail = -1;
+      return true;
+    }
+
+    head = (head + 1) % size;
+
+    return true;
   }
 };
 
 int main() {
-  CircularQueue queue(5);
+  CircularQueue queue(3);
 
-  queue.enqueue(5);
-
-  std::cout << queue.first() << std::endl;
+  std::cout << queue.enqueue(1) << std::endl;
+  std::cout << queue.enqueue(2) << std::endl;
+  std::cout << queue.enqueue(3) << std::endl;
+  std::cout << queue.enqueue(4) << std::endl;
+  std::cout << queue.last() << std::endl;
+  std::cout << queue.isFull() << std::endl;
+  std::cout << queue.dequeue() << std::endl;
+  std::cout << queue.enqueue(4) << std::endl;
   std::cout << queue.last() << std::endl;
 
   return 0;
