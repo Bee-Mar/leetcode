@@ -7,8 +7,9 @@ private:
   int head, tail, size;
 
 public:
-  CircularQueue() {
-    queue.resize(5);
+  CircularQueue(int capacity) {
+    queue.resize(capacity);
+    size = capacity;
     head = tail = -1;
   }
 
@@ -18,7 +19,7 @@ public:
 
   bool enqueue(int value) {
 
-    if ((tail - head) == queue.size()) {
+    if ((tail + 1) % size == head) {
       return false;
     }
 
@@ -26,9 +27,23 @@ public:
       head = 0;
     }
 
-    tail = (++tail % queue.size());
+    tail = (++tail % size);
 
     queue[tail] = value;
+
+    return true;
+  }
+
+  bool dequeue() {
+    if (isEmpty()) {
+      return false;
+    }
+
+    if (head == tail) {
+      head = tail = -1;
+    }
+
+    head = (++head % size);
 
     return true;
   }
@@ -48,25 +63,11 @@ public:
 
     return queue[tail];
   }
-
-  bool dequeue() {
-    if (isEmpty()) {
-      return false;
-    }
-
-    if (head == tail) {
-      head = tail = -1;
-    }
-
-    head = (++head % queue.size());
-
-    return true;
-  }
 };
 
 int main() {
 
-  CircularQueue queue;
+  CircularQueue queue(5);
 
   queue.enqueue(5);
 
