@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 #include <vector>
 
@@ -9,75 +8,89 @@ struct ListNode {
 };
 
 class Solution {
-
 public:
-  void printList(ListNode *list) {
-    ListNode *temp = list;
-    while (temp->next) {
+  void displayList(struct ListNode *list, int numelems) {
+
+    struct ListNode *temp = list;
+
+    while (temp && --numelems >= 0) {
       std::cout << temp->val << std::endl;
       temp = temp->next;
     }
+
+    free(temp);
   }
 
-  ListNode *fillLinkedList(std::vector<int> vals) {
-    int i = 0;
-    ListNode *list = (struct ListNode *)malloc(sizeof(struct ListNode *));
-    ListNode *temp = list;
+  ListNode *fillList(std::vector<int> &values) {
+    int i;
+    struct ListNode *list = (struct ListNode *)malloc(sizeof(struct ListNode));
+    struct ListNode *temp = list;
 
-    for (i = 0; i < vals.size(); i++) {
-      temp->val = vals[i];
-      temp->next = (struct ListNode *)malloc(sizeof(struct ListNode *));
-      if (i != vals.size() - 1)
-        temp = temp->next;
+    for (i = 0; i < values.size(); i++) {
+      temp->val = values[i];
+      temp->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+      temp = temp->next;
     }
 
     return list;
   }
 
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-    int val1 = 0, val2 = 0, total = 0, i = 0, j = 0, exp = 10;
-    ListNode *temp1 = l1, *temp2 = l2;
 
-    while (1) {
-      if (temp1->next) {
-        val1 += (temp1->val * (int)pow(10.0, (double)i++));
-        temp1 = temp1->next;
+    struct ListNode *result;
+
+    result = (struct ListNode *)malloc(sizeof(struct ListNode));
+
+    int carry = 0, sum = 0;
+
+    while (l1->next || l2->next) {
+
+      if (l1) {
+        sum += l1->val;
+        std::cout << "l1->val = " << l1->val << std::endl;
       }
 
-      if (temp2->next) {
-        val2 += (temp2->val * (int)pow(10.0, (double)j++));
-        temp2 = temp2->next;
+      if (l2) {
+        sum += l2->val;
+        std::cout << "l2->val = " << l2->val << std::endl;
       }
 
-      else {
-        temp1 = l1;
-        total = val1 + val2;
-        break;
+      if (sum % 10 == 0) {
+        carry = sum / 10;
+        sum = 0;
+      } else {
+        carry = 0;
       }
+
+      std::cout << sum << std::endl;
+
+      result->val = sum;
+      result->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+
+      sum = carry;
+
+      l1 = l1->next;
+      l2 = l2->next;
     }
 
-    while (temp1->next) {
-      temp1->val = total % 10;
-      total /= 10;
-      temp1 = temp1->next;
-    }
-
-    return l1;
+    return result;
   }
 };
 
 int main() {
-  Solution sol;
 
-  std::vector<int> input1, input2;
-  input1 = {2, 4, 3};
-  input2 = {5, 6, 4};
+  std::vector<int> values1 = {2, 4, 3};
+  std::vector<int> values2 = {5, 6, 4};
 
-  ListNode *list1 = sol.fillLinkedList(input1);
-  ListNode *list2 = sol.fillLinkedList(input2);
-  ListNode *result = sol.addTwoNumbers(list1, list2);
+  Solution solution;
 
-  sol.printList(result);
+  struct ListNode *l1 = solution.fillList(values1);
+  struct ListNode *l2 = solution.fillList(values2);
+
+  struct ListNode *result = solution.addTwoNumbers(l1, l2);
+
+  free(l1);
+  free(l2);
 
   return 0;
 }
