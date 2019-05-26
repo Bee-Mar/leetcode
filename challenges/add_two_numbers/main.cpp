@@ -62,8 +62,6 @@ public:
         carry = 0;
       }
 
-      std::cout << sum << std::endl;
-
       result->val = sum;
       result->next = (struct ListNode *)malloc(sizeof(struct ListNode));
 
@@ -88,6 +86,7 @@ int main() {
   struct ListNode *l2 = solution.fillList(values2);
 
   struct ListNode *result = solution.addTwoNumbers(l1, l2);
+  solution.displayList(result, 3);
 
   free(l1);
   free(l2);
