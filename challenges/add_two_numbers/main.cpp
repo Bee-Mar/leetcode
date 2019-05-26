@@ -36,16 +36,16 @@ public:
   }
 
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-
-    struct ListNode *result;
-    struct ListNode *listPtr;
+    struct ListNode *result, *listPtr;
 
     result = (struct ListNode *)malloc(sizeof(struct ListNode));
     listPtr = result;
 
     int carry = 0, sum = 0;
 
-    while (l1->next || l2->next) {
+    while (l1 || l2) {
+
+      sum = carry;
 
       if (l1) {
         sum += l1->val;
@@ -63,16 +63,22 @@ public:
       }
 
       listPtr->val = sum;
-      listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
-      listPtr = listPtr->next;
 
-      sum = carry;
+      l1 = l1->next ? l1->next : NULL;
+      l2 = l2->next ? l2->next : NULL;
 
-      l1 = l1->next;
-      l2 = l2->next;
+      if (l1 || l2) {
+        listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+        listPtr = listPtr->next;
+
+      } else if (carry) {
+        listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+        listPtr = listPtr->next;
+        listPtr->val = carry;
+      }
     }
 
-    free(listPtr);
+    listPtr->next = NULL;
 
     return result;
   }
@@ -83,6 +89,9 @@ int main() {
   std::vector<int> values1 = {2, 4, 3};
   std::vector<int> values2 = {5, 6, 4};
 
+  int resultSize =
+      values1.size() > values2.size() ? values1.size() : values2.size();
+
   Solution solution;
 
   struct ListNode *l1 = solution.fillList(values1);
@@ -90,7 +99,7 @@ int main() {
 
   struct ListNode *result = solution.addTwoNumbers(l1, l2);
 
-  solution.displayList(result, 3);
+  solution.displayList(result, resultSize);
 
   free(l1);
   free(l2);
