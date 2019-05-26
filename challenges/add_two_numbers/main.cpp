@@ -38,8 +38,10 @@ public:
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
 
     struct ListNode *result;
+    struct ListNode *listPtr;
 
     result = (struct ListNode *)malloc(sizeof(struct ListNode));
+    listPtr = result;
 
     int carry = 0, sum = 0;
 
@@ -47,12 +49,10 @@ public:
 
       if (l1) {
         sum += l1->val;
-        std::cout << "l1->val = " << l1->val << std::endl;
       }
 
       if (l2) {
         sum += l2->val;
-        std::cout << "l2->val = " << l2->val << std::endl;
       }
 
       if (sum % 10 == 0) {
@@ -62,14 +62,17 @@ public:
         carry = 0;
       }
 
-      result->val = sum;
-      result->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+      listPtr->val = sum;
+      listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
+      listPtr = listPtr->next;
 
       sum = carry;
 
       l1 = l1->next;
       l2 = l2->next;
     }
+
+    free(listPtr);
 
     return result;
   }
@@ -86,6 +89,7 @@ int main() {
   struct ListNode *l2 = solution.fillList(values2);
 
   struct ListNode *result = solution.addTwoNumbers(l1, l2);
+
   solution.displayList(result, 3);
 
   free(l1);
