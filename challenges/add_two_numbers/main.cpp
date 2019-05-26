@@ -9,11 +9,11 @@ struct ListNode {
 
 class Solution {
 public:
-  void displayList(struct ListNode *list, int numelems) {
+  void displayList(struct ListNode *list) {
 
     struct ListNode *temp = list;
 
-    while (temp && --numelems >= 0) {
+    while (temp) {
       std::cout << temp->val << std::endl;
       temp = temp->next;
     }
@@ -36,58 +36,30 @@ public:
   }
 
   ListNode *addTwoNumbers(ListNode *l1, ListNode *l2) {
-    struct ListNode *result, *listPtr;
+    ListNode *result, *FINISHED = new ListNode(0);
+    ListNode **listPtr = &result;
+    int carryOver = 0, sum = 0;
 
-    result = (struct ListNode *)malloc(sizeof(struct ListNode));
-    listPtr = result;
+    while (l1 != FINISHED || l2 != FINISHED || carryOver) {
+      sum = (l1->val + l2->val + carryOver) % 10;
+      carryOver = (l1->val + l2->val + carryOver) / 10;
 
-    int carry = 0, sum = 0;
+      *listPtr = new ListNode(sum);
+      listPtr = &(*listPtr)->next;
 
-    while (l1 || l2) {
-
-      sum = carry;
-
-      if (l1) {
-        sum += l1->val;
-      }
-
-      if (l2) {
-        sum += l2->val;
-      }
-
-      if (sum % 10 == 0) {
-        carry = sum / 10;
-        sum = 0;
-      } else {
-        carry = 0;
-      }
-
-      listPtr->val = sum;
-
-      l1 = l1->next ? l1->next : NULL;
-      l2 = l2->next ? l2->next : NULL;
-
-      if (l1 || l2) {
-        listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
-        listPtr = listPtr->next;
-
-      } else if (carry) {
-        listPtr->next = (struct ListNode *)malloc(sizeof(struct ListNode));
-        listPtr = listPtr->next;
-        listPtr->val = carry;
-      }
+      l1 = l1->next ? l1->next : FINISHED;
+      l2 = l2->next ? l2->next : FINISHED;
     }
 
-    listPtr->next = NULL;
-
+    delete FINISHED;
     return result;
   }
 };
 
 int main() {
 
-  std::vector<int> values1 = {2, 4, 3};
-  std::vector<int> values2 = {5, 6, 4};
+  std::vector<int> values1 = {1, 8};
+  std::vector<int> values2 = {0};
 
   int resultSize =
       values1.size() > values2.size() ? values1.size() : values2.size();
@@ -99,7 +71,7 @@ int main() {
 
   struct ListNode *result = solution.addTwoNumbers(l1, l2);
 
-  solution.displayList(result, resultSize);
+  solution.displayList(result);
 
   free(l1);
   free(l2);
