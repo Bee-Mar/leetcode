@@ -1,6 +1,6 @@
+#include <stdio.h>
 #include <iostream>
 #include <map>
-#include <stdio.h>
 #include <string>
 #include <unordered_map>
 #include <vector>
@@ -8,7 +8,7 @@
 using namespace std;
 
 class Solution {
-public:
+ public:
   int lengthOfLongestSubstring(string s) {
     if (s.size() <= 1) {
       return s.size();
@@ -17,23 +17,32 @@ public:
     unordered_map<char, int> table;
     unordered_map<char, int>::iterator it;
 
-    int i, start = 0, maxLen = 0, currentLen = 0;
+    int i;
+    int currentStart = 0, currentEnd = 0;
+    int maxStart = 0, maxEnd = 0;
 
     for (i = 0; i < s.size(); i++) {
       if ((it = table.find(s.at(i))) != table.end()) {
-        currentLen = i - start;
-        maxLen = (currentLen > maxLen) ? currentLen : maxLen;
-        start = (it->second + 1);
+        if (it->second >= currentStart) {
+          currentEnd = i - currentStart;
+
+          if (maxEnd < currentEnd) {
+            maxEnd = currentEnd;
+            maxStart = currentStart;
+          }
+
+          currentStart = ++it->second;
+        }
+
         it->second = i;
 
       } else {
         table.insert(pair<char, int>(s.at(i), i));
-        currentLen++;
       }
     }
 
-    maxLen = (currentLen > maxLen) ? currentLen : maxLen;
-    return maxLen;
+    currentEnd = (i - currentStart);
+    return (maxEnd < currentEnd) ? currentEnd : maxEnd;
   }
 };
 
