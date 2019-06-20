@@ -1,26 +1,21 @@
-#include <cmath>
 #include <iostream>
-#include <string>
+#include <limits>
 #include <vector>
 
 class Solution {
 public:
   int reverse(int x) {
 
-    int digits(std::floor(std::log10(std::abs((double)x)) + 1));
+    int temp(0), reversed(0);
 
-    if (digits <= 1) { return x; }
-
-    int tempX(x), result(0), currPlace(1);
-
-    while (digits--) {
-      const int currDigits(std::pow(static_cast<double>(10), static_cast<double>(digits)));
-      result += ((tempX / currDigits) * currPlace);
-      tempX %= currDigits;
-      currPlace *= 10;
+    while (x) {
+      if (reversed > (INT32_MAX / 10) || reversed < (INT32_MIN / 10)) { return 0; }
+      temp = (x % 10);
+      x /= 10;
+      reversed = reversed * 10 + temp;
     }
 
-    return result;
+    return reversed;
   }
 };
 
@@ -28,17 +23,16 @@ int main() {
 
   Solution solution;
 
-  std::vector<int> vec = {100002};
+  std::vector<int> vec = {1234, 1534236469};
 
   using std::cout;
   using std::endl;
 
   for (int val : vec) {
-    const int result(solution.reverse(val));
-
+    const int temp(solution.reverse(val));
     cout << "Original: " << val;
     cout << " -> ";
-    cout << "Reversed: " << result << endl;
+    cout << "Reversed: " << temp << endl;
   }
 
   return 0;
