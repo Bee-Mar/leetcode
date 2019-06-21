@@ -5,7 +5,6 @@
 class Solution {
 public:
   int reverse(int x) {
-
     int temp(0), reversed(0);
 
     while (x) {
