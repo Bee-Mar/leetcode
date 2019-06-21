@@ -34,7 +34,7 @@ public:
         break;
       }
 
-      if (previousValue < currentValue) { result += (-2 * previousValue); }
+      if (previousValue < currentValue) { result += -(previousValue << 1); }
 
       result += currentValue;
       previousValue = currentValue;
