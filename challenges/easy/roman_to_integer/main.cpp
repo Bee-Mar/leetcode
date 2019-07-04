@@ -45,13 +45,13 @@ public:
 };
 
 int main() {
+  std::vector<std::string> romanNumerals{"IV"};
 
-  using namespace std;
-
-  vector<string> romanNumerals{"IV"};
   Solution solution;
 
-  for (string romanNumeral : romanNumerals) { cout << solution.romanToInt(romanNumeral) << endl; }
+  for (std::string romanNumeral : romanNumerals) {
+    std::cout << solution.romanToInt(romanNumeral) << std::endl;
+  }
 
   return 0;
 }
