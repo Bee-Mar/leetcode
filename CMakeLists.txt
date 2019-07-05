@@ -13,6 +13,7 @@ add_executable(palindrome_number ${CHALLENGES_EASY_DIR}/palindrome_number/main.c
 add_executable(reverse_integer ${CHALLENGES_EASY_DIR}/reverse_integer/main.cpp)
 add_executable(roman_to_integer ${CHALLENGES_EASY_DIR}/roman_to_integer/main.cpp)
 add_executable(two_sum ${CHALLENGES_EASY_DIR}/two_sum/main.cpp)
+add_executable(longest_common_prefix ${CHALLENGES_EASY_DIR}/longest_common_prefix/main.cpp)
 
 # MEDIUM
 add_executable(add_two_numbers ${CHALLENGES_MEDIUM_DIR}/add_two_numbers/main.cpp)
