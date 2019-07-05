@@ -2,6 +2,7 @@
 #include <vector>
 
 using namespace std;
+
 class Solution {
 public:
   string longestCommonPrefix(vector<string> &strs) {
@@ -25,6 +26,12 @@ public:
     }
 
     return strs.at(0).substr(0, j);
+  }
+};
+
+class RecursiveSolution {
+public:
+  string longestCommonPrefix(vector<string> &strs) {
   }
 };
 
