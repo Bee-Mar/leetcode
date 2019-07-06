@@ -35,5 +35,5 @@ mkdir build && cd $_ && cmake -G Ninja .. && ninja
 |     Easy     |               Two Sum               |    8 ms : 96.89%    |   10.0 MB : 46.81%   |   [Results](https://leetcode.com/submissions/detail/237585273/)   |
 |     Easy     |          Valid Parentheses          |    0 ms : 100.0%    |   8.30 MB : 81.84%   |   [Results](https://leetcode.com/submissions/detail/241260100/)   |
 |    Medium    |           Add Two Numbers           |   20 ms : 95.04%    |   10.0 MB : 38.14%   |   [Results](https://leetcode.com/submissions/detail/231515855/)   |
-|    Medium    |   Longest Substring w/o Repeating   |   16 ms : 76.44%    |   11.0 MB : 53.00%   |   [Results](https://leetcode.com/submissions/detail/240839966/)   |
+|    Medium    |   Longest Substring w/o Repeating   |   16 ms : 76.44%    |   11.0 MB : 53.00%   |   [Results](https://leetcode.com/submissions/detail/231767778/)   |
 | :----------: | :---------------------------------: | :-----------------: | :------------------: | :---------------------------------------------------------------: |
