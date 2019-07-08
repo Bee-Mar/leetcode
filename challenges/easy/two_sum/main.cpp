@@ -7,7 +7,7 @@ using namespace std;
 class Solution {
   public:
     vector<int> twoSum(vector<int> &nums, int target) {
-        vector<int> result = {0, 0};
+        vector<int> result{0, 0};
 
         map<int, int> table;
 
@@ -32,7 +32,7 @@ class Solution {
 int main() {
 
     int target = 6;
-    vector<int> nums = {3, 2, 4};
+    vector<int> nums{3, 2, 4};
 
     Solution sol;
 
