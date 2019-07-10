@@ -24,6 +24,7 @@ set(MEDIUM_CHALLENGES
     # the name of the directories, also used as executable names
     add_two_numbers
     longest_substring_without_repeating
+    string_to_integer
     )
 
 set(HARD_CHALLENGES
